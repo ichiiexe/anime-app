@@ -76,11 +76,12 @@
           </button>
         </div>
       </nav>
-      <div class="min-h-dvh text-white">
-        <h1 class="text-center text-4xl bold p-2">Popular Anime</h1>
+      <div class="text-white">
+        <h1 class="text-center text-2xl bold">Popular Anime</h1>
         <div class="relative">
           <swiper-container
             navigation="true"
+            loop="true"
             class="mySwiper"
             effect="coverflow"
             grab-cursor="true"
@@ -99,6 +100,18 @@
           </swiper-container>
         </div>
       </div>
+      <div>
+        <swiper-container
+          class="mySwiper"
+          navigation="true"
+          loop="true"
+          slides-per-view="10"
+          space-between="5"
+          free-mode="true"
+          id="recentAnime"
+        >
+        </swiper-container>
+      </div>
       <footer class="text-white text-center w-full bottom-0">
         <img /> © Anime9, LLC
         <ul></ul>
@@ -106,5 +119,6 @@
     </div>
 
     <script type="module" src="./home.js"></script>
+    <script type="module" src="./swiper.js"></script>
   </body>
 </html>

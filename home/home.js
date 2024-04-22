@@ -1,11 +1,11 @@
 import "../style.css";
 import axios from "axios";
-import { register } from "swiper/element/bundle";
-// register Swiper custom elements
-register();
+
+// Global//
+const baseURL = "http://localhost:3000/";
 
 async function getPopular() {
-  const url = "https://animeapi-mu.vercel.app/meta/anilist/popular";
+  const url = `${baseURL}meta/anilist/popular`;
   try {
     const { data } = await axios.get(url, {
       params: {
@@ -21,7 +21,6 @@ async function getPopular() {
 const popularAnime = await getPopular();
 const popList = popularAnime.results;
 popList.forEach((pop) => {
-  console.log(pop);
   const containerpop = document.getElementById("topContainer");
 
   const animeCard = document.createElement("swiper-slide");
@@ -44,15 +43,15 @@ popList.forEach((pop) => {
   </div>
   <div class="flex gap-5">
     <div class="flex-1">
+    <p><span class="text-purple-600">Score</span>: ${pop.rating}/100</p>
       <p><span class="text-purple-600">Type</span>: ${pop.type}</p>
       <p><span class="text-purple-600">Status</span>: ${pop.status} </p>
       <p><span class="text-purple-600">Date Aired</span>: ${pop.releaseDate}</p>
-      <p id="genre" class="flex"><span class="text-purple-600">Genre</span>: </p>
     </div>
     <div class="flex-1">
-      <p><span class="text-purple-600">Score</span>: ${pop.rating}/100</p>
       <p><span class="text-purple-600">Episodes</span>: ${pop.totalEpisodes}</p>
       <p><span class="text-purple-600">Duration</span>: ${pop.duration} mins</p>
+      <p id="genre" class=""><span class="text-purple-600 ">Genre</span>: ${pop.genres} </p>
     </div>
   </div>
 </div>
@@ -60,16 +59,13 @@ popList.forEach((pop) => {
 
   containerpop.appendChild(animeCard);
 
-  // pop.genres.forEach((genre) => {
-  //   const genrecont = containerpop.querySelector("#genre");
-  //   const genreLink = document.createElement("a");
-  //   genreLink.textContent = ` ${genre}${genre <= genre.length ? "" : ","}`;
-  //   genrecont.appendChild(genreLink);
-  // });
+  pop.genres.forEach((genre) => {
+    document.create;
+  });
 });
 
 async function getPopularTrailer() {
-  const url = "https://animeapi-mu.vercel.app/anime/animefox/info?id=";
+  const url = `${baseURL}anime/animefox/info?id=`;
   const data = async () => {
     try {
       const { data } = await axios.get(url, { params: { id: "spy-x-family" } });
@@ -81,7 +77,7 @@ async function getPopularTrailer() {
 }
 
 async function getRecentEpisodes() {
-  const url = "https://animeapi-mu.vercel.app/meta/anilist/recent-episodes";
+  const url = `${baseURL}meta/anilist/recent-episodes`;
   try {
     const { data } = await axios.get(url, {
       params: {
@@ -96,4 +92,15 @@ async function getRecentEpisodes() {
   }
 }
 
-// console.log(getRecentEpisodes());
+const { results } = await getRecentEpisodes();
+console.log(results);
+const recentAniContainer = document.getElementById("recentAnime");
+
+results.forEach((anime) => {
+  const recentCard = document.createElement("swiper-slide");
+  recentCard.innerHTML = `<div>
+  <img src="${anime.image}" />
+  </div>`;
+
+  recentAniContainer.appendChild(recentCard);
+});
