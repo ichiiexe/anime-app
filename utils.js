@@ -44,3 +44,18 @@ export async function getRecentEpisodes() {
     throw new Error(err.message);
   }
 }
+
+export async function getTrending() {
+  const url = `${baseURL}meta/anilist/trending`;
+  try {
+    const { data } = await axios.get(url, {
+      params: {
+        page: 1,
+        perPage: 20,
+      },
+    });
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}

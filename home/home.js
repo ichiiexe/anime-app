@@ -1,10 +1,11 @@
 import "../style.css";
 import axios from "axios";
-import { getPopular, getRecentEpisodes } from "../utils";
+import { getPopular, getRecentEpisodes, getTrending } from "../utils";
 
-const [popularAnime, recentAnime] = await Promise.all([
+const [popularAnime, recentAnime, trendingAnime] = await Promise.all([
   getPopular(),
   getRecentEpisodes(),
+  getTrending(),
 ]);
 
 popularAnime.results.forEach((pop) => {
@@ -56,4 +57,15 @@ recentAnime.results.forEach((anime) => {
   </div>`;
 
   recentAniContainer.appendChild(recentCard);
+});
+
+const trendingAniContainer = document.getElementById("trendingAnime");
+
+trendingAnime.results.forEach((trend) => {
+  const recentCard = document.createElement("swiper-slide");
+  recentCard.innerHTML = `<div>
+  <img src="${trend.image}" />
+  </div>`;
+
+  trendingAniContainer.appendChild(recentCard);
 });

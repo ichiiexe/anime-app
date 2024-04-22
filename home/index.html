@@ -27,7 +27,7 @@
   <body>
     <div
       id="app"
-      class="font-['Poppins'] bg-animebg bg-cover bg-center bg-no-repeat min-h-dvh"
+      class="font-['Poppins'] bg-animebg bg-cover bg-center bg-no-repeat bg-fixed min-h-dvh"
     >
       <!-- Navigation -->
       <nav
@@ -100,36 +100,39 @@
           </swiper-container>
         </div>
       </div>
-      <div class="text-white p-5">
-        <h1 class="text-lg">Recently Updated</h1>
-        <swiper-container
-          class="mySwiper "
-          mousewheel="true"
-          sensitivity="4"
-          snapOnRelease="true"
-          slides-per-view="10"
-          rewind="true"
-          space-between="5"
-          free-mode="true"
-          id="recentAnime"
-        >
-        </swiper-container>
-        </div>
-        <div class="text-white p-5">
-          <h1 class="text-lg">Recently Updated</h1>
-          <swiper-container
-            class="mySwiper "
-            mousewheel="true"
-            sensitivity="4"
-            snapOnRelease="true"
-            slides-per-view="10"
-            space-between="5"
-            free-mode="true"
-            id="recentAnime"
-          >
-          </swiper-container>
+          <div class="h-dvh" >
+            <div class="text-white p-5">
+              <h1 class="text-lg">Recently Updated</h1>
+              <swiper-container
+                class="mySwiper "
+                mousewheel="true"
+                sensitivity="4"
+                snapOnRelease="true"
+                slides-per-view="10"
+                rewind="true"
+                space-between="5"
+                free-mode="true"
+                id="recentAnime"
+              >
+              </swiper-container>
+              </div>
+            <div class="text-white p-5">
+              <h1 class="text-lg">Trending Now</h1>
+              <swiper-container
+                class="mySwiper "
+                mousewheel="true"
+                sensitivity="4"
+                snapOnRelease="true"
+                slides-per-view="10"
+                space-between="5"
+                free-mode="true"
+                id="trendingAnime"
+              >
+              </swiper-container>
+              </div>
           </div>
       </div>
+     
       <footer class="text-white text-center w-full bottom-0">
         <img /> © Anime9, LLC
         <ul></ul>
