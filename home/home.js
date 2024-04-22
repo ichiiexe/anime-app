@@ -1,26 +1,13 @@
 import "../style.css";
 import axios from "axios";
+import { getPopular, getRecentEpisodes } from "../utils";
 
-// Global//
-const baseURL = "http://localhost:3000/";
+const [popularAnime, recentAnime] = await Promise.all([
+  getPopular(),
+  getRecentEpisodes(),
+]);
 
-async function getPopular() {
-  const url = `${baseURL}meta/anilist/popular`;
-  try {
-    const { data } = await axios.get(url, {
-      params: {
-        page: 1,
-        perPage: 10,
-      },
-    });
-    return data;
-  } catch (err) {
-    throw new Error(err.message);
-  }
-}
-const popularAnime = await getPopular();
-const popList = popularAnime.results;
-popList.forEach((pop) => {
+popularAnime.results.forEach((pop) => {
   const containerpop = document.getElementById("topContainer");
 
   const animeCard = document.createElement("swiper-slide");
@@ -58,33 +45,11 @@ popList.forEach((pop) => {
 </div>`;
 
   containerpop.appendChild(animeCard);
-
-  pop.genres.forEach((genre) => {
-    document.create;
-  });
 });
 
-async function getRecentEpisodes() {
-  const url = `${baseURL}meta/anilist/recent-episodes`;
-  try {
-    const { data } = await axios.get(url, {
-      params: {
-        page: 1,
-        perPage: 20,
-        provider: "gogoanime",
-      },
-    });
-    return data;
-  } catch (err) {
-    throw new Error(err.message);
-  }
-}
-
-const { results } = await getRecentEpisodes();
-console.log(results);
 const recentAniContainer = document.getElementById("recentAnime");
 
-results.forEach((anime) => {
+recentAnime.results.forEach((anime) => {
   const recentCard = document.createElement("swiper-slide");
   recentCard.innerHTML = `<div>
   <img src="${anime.image}" />
