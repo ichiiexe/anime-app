@@ -64,25 +64,13 @@ popList.forEach((pop) => {
   });
 });
 
-async function getPopularTrailer() {
-  const url = `${baseURL}anime/animefox/info?id=`;
-  const data = async () => {
-    try {
-      const { data } = await axios.get(url, { params: { id: "spy-x-family" } });
-      return data;
-    } catch (err) {
-      throw new Error(err.message);
-    }
-  };
-}
-
 async function getRecentEpisodes() {
   const url = `${baseURL}meta/anilist/recent-episodes`;
   try {
     const { data } = await axios.get(url, {
       params: {
         page: 1,
-        perPage: 15,
+        perPage: 20,
         provider: "gogoanime",
       },
     });
