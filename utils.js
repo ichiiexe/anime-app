@@ -15,7 +15,7 @@ export async function fetchAnime(searchInput) {
 }
 
 export async function getPopular() {
-  const url = `${baseURL}meta/anilist/popular`;
+  const url = `${baseURL}meta/anilist/popular?page=&perPage=`;
   try {
     const { data } = await axios.get(url, {
       params: {
@@ -46,14 +46,39 @@ export async function getRecentEpisodes() {
 }
 
 export async function getTrending() {
-  const url = `${baseURL}meta/anilist/trending`;
+  const url = `${baseURL}meta/anilist/trending?page=1&perPage=20`;
   try {
-    const { data } = await axios.get(url, {
-      params: {
-        page: 1,
-        perPage: 20,
-      },
-    });
+    const { data } = await axios.get(url);
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function getAnimeInfo(animeId) {
+  const url = `${baseURL}meta/anilist/info/${animeId}?provider=gogoanime`;
+  try {
+    const { data } = await axios.get(url);
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function getRandom() {
+  const url = `${baseURL}meta/anilist/random-anime`;
+  try {
+    const { data } = await axios.get(url);
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
+export async function getEpisodes(episodeId) {
+  const url = `${baseURL}anime/gogoanime/watch/${episodeId}`;
+  try {
+    const { data } = await axios.get(url, { params: { server: "gogocdn" } });
     return data;
   } catch (err) {
     throw new Error(err.message);

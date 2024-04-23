@@ -1,6 +1,10 @@
 import "../style.css";
-import axios from "axios";
-import { getPopular, getRecentEpisodes, getTrending } from "../utils";
+import {
+  getPopular,
+  getRecentEpisodes,
+  getTrending,
+  getAnimeInfo,
+} from "../utils";
 
 const [popularAnime, recentAnime, trendingAnime] = await Promise.all([
   getPopular(),
@@ -52,9 +56,14 @@ const recentAniContainer = document.getElementById("recentAnime");
 
 recentAnime.results.forEach((anime) => {
   const recentCard = document.createElement("swiper-slide");
-  recentCard.innerHTML = `<div>
-  <img src="${anime.image}" />
-  </div>`;
+  recentCard.classList = "line-clamp-1 text-center relative w-full h-full";
+  recentCard.id = anime.id;
+  recentCard.innerHTML = `
+  <a href="/watch/watch.html?id="> 
+  <img class="w-full h-60"  src="${anime.image}" />
+  <h1 class="text-sm">${anime.title.english}</h1>
+  </a>
+`;
 
   recentAniContainer.appendChild(recentCard);
 });
@@ -63,9 +72,14 @@ const trendingAniContainer = document.getElementById("trendingAnime");
 
 trendingAnime.results.forEach((trend) => {
   const recentCard = document.createElement("swiper-slide");
-  recentCard.innerHTML = `<div>
-  <img src="${trend.image}" />
-  </div>`;
+  recentCard.classList = "line-clamp-1 text-center w-full h-full";
+  recentCard.id = trend.id;
+  recentCard.innerHTML = `
+  <img class="w-full h-60" src="${trend.image}" />
+  <h1 class="text-sm">${trend.title.english}</h1>
+  <span></span>
+ `;
 
   trendingAniContainer.appendChild(recentCard);
 });
+const aniCard = document.querySelectorAll("swiper-slide");

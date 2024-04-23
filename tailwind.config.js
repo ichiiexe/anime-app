@@ -6,6 +6,7 @@ module.exports = {
     "./random/random.js",
     "./home/index.html",
     "./home/home.js",
+    "./watch/watch.html",
   ],
   theme: {
     extend: {

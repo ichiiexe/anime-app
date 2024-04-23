@@ -1,39 +1,25 @@
 import "../style.css";
-import axios from "axios";
+import { getRandom, getAnimeInfo, getEpisodes } from "../utils";
 
-// console.log(randomAni);
-// const app = document.querySelector("#content");
-// const randomAniContainer = document.createElement("div");
-// randomAniContainer.classList = "pt-20 p-10";
-// randomAniContainer.innerHTML = `
-// <div id="info" class="flex gap-10">
-//   <img
-//     class=""
-//     src="${randomAni.images.jpg.image_url}"
-//   />
-//   <div class="flex flex-col GAP-10">
-//     <div class="flex-1">
-//       <p class="text-2xl">${randomAni.title}</p>
-//       <h1>${randomAni.title_japanese}</h1>
-//       <p>${randomAni.synopsis}</p>
-//     </div>
-//     <div class="flex gap-10">
-//       <div>
-//         <p>Type: ${randomAni.type}</p>
-//         <p>Status: ${randomAni.status}</p>
-//         <p>Date Aired: ${randomAni.aired.string}.</p>
-//         <p>Episodes: ${randomAni.episodes}</p>
-//         <p>Genre: ${randomAni.genres.name}</p>
-//       </div>
-//       <div>
-//         <p>Score: ${randomAni.score}</p>
-//         <p>Quality</p>
-//         <p>Duration: ${randomAni.duration}</p>
-//       </div>
-//       >
-//     </div>
-//   </div>
-// </div>
-// `;
+const random = await getRandom();
+const { episodes } = random;
+if (episodes != 0) {
+  const [info, episode] = await Promise.all([
+    getAnimeInfo(random.id),
+    getEpisodes(episodes[0].id),
+  ]);
+  console.log(episode);
 
-// content.appendChild(randomAniContainer);
+  const source = episode.sources;
+  const defaultSource = source.filter((item) =>
+    Object.values(item).includes("default")
+  );
+  console.log(defaultSource);
+
+  const content = document.getElementById("content");
+  const videoplayer = document.createElement("video");
+  videoplayer.classList = "w-full h-full";
+  videoplayer.innerHTML = `<source class="w-full h-full" src="${defaultSource[0].url}" />`;
+
+  content.appendChild(videoplayer);
+}
