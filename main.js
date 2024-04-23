@@ -1,6 +1,16 @@
 import "./style.css";
 import { fetchAnime } from "./utils";
-import Swiper from "swiper";
+import { register } from "swiper/element/bundle";
+// register Swiper custom elements
+register();
+
+const navButton = document.getElementById("navButton");
+const navMenu = document.getElementById("navMenu");
+console.log(navButton);
+
+navButton.addEventListener("click", () => {
+  navMenu.classList.toggle("hidden");
+});
 
 const userLogin = document.getElementById("userLogin");
 const loginContainer = document.createElement("main");
